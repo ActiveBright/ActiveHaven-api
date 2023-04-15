@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const cors= require('cors');
 const knex = require('knex');
 const { useDeferredValue } = require('react');
+require('dotenv').config();
+
+const PORT = process.env.PORT || 3001
 
 
 const activedb =knex({
@@ -65,19 +68,12 @@ shiftstart:[
 
 
 app.get('/',(req ,res)=>{
-    
+  
+
 })
 
 app.post('/signin',(req, res)=>{
 const{password,email}= req.body;
-  /*  
-  console.log(isValid);
-  if(isValid){
-    res.json("Welcome");
-  }else{
-    res.status(404).json("wrong user name or password");
-  }
-   */
   database.users[0].staffemail= email;
  activedb.select('email', 'password').from('login')
  .where('email','=',email)
@@ -276,8 +272,7 @@ const slq=
 
 
 
+app.listen(PORT, ()=>{
+ console.log(`listening on port ${PORT}`)
+});
 
-
-
-
-app.listen(3001);
